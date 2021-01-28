@@ -3,8 +3,8 @@
 ## 浏览器
 ### 1. 为什么一般把css放在<head></head>中，js放在<body>底部？
 
-- css会阻塞页面渲染，越早加载越好
-- js会阻塞DOM树的生成以及渲染，放在底部更好
+- css 会阻塞页面渲染，越早加载越好
+- js 会阻塞 DOM 树的生成以及渲染，放在底部更好
 
 ### 2. cookies，sessionStorage 和 localStorage 的区别
 
