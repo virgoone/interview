@@ -50,14 +50,15 @@ function throttle(fn) {
 
 ### 4. Chrome 中有哪些主要进程？
 
-<br />![](https://cdn.nlark.com/yuque/0/2021/jpeg/2637095/1610263364905-a75c9099-9ba6-45bb-b771-30257ecdaa26.jpeg#align=left&display=inline&height=956&margin=%5Bobject%20Object%5D&originHeight=956&originWidth=2208&size=0&status=done&style=none&width=2208)<br />
-<br />在 Chrome 中，主要的进程有 4 个：
+![](https://cdn.nlark.com/yuque/0/2021/jpeg/2637095/1610263364905-a75c9099-9ba6-45bb-b771-30257ecdaa26.jpeg#align=left&display=inline&height=956&margin=%5Bobject%20Object%5D&originHeight=956&originWidth=2208&size=0&status=done&style=none&width=2208)
+
+在 Chrome 中，主要的进程有 4 个：
 
 1. **浏览器主进程**：主要负责**界面显示**、**用户交互**、子进程管理，同时提供存储功能，例如：浏览器 TAB 的前进、后退、地址栏、书签栏等
-1. **渲染进程**：核心任务是**将 HTML、CSS 和 JavaScript 转换为用户可以与之交互的网页**。**排版引擎 Blink** 和 **JS 引擎 V8** 都是运行在该进程中，默认情况下，Chrome 会为**每个 Tab 标签创建一个渲染进程**。出于安全考虑，渲染进程都是运行在沙盒中
-1. **GPU 进程**：（最初没有）处理浏览器的 GPU 任务
-1. **网络进程**：（之前在主进程中）负责页面的**网络资源加载**
-1. **插件进程**：负责**插件的运行**，控制网页中使用到的插件
+2. **渲染进程**：核心任务是**将 HTML、CSS 和 JavaScript 转换为用户可以与之交互的网页**。**排版引擎 Blink** 和 **JS 引擎 V8** 都是运行在该进程中，默认情况下，Chrome 会为**每个 Tab 标签创建一个渲染进程**。出于安全考虑，渲染进程都是运行在沙盒中
+3. **GPU 进程**：（最初没有）处理浏览器的 GPU 任务
+4. **网络进程**：（之前在主进程中）负责页面的**网络资源加载**
+5. **插件进程**：负责**插件的运行**，控制网页中使用到的插件
 
 #### 4.1 这些进程之间的关系是什么？
 
