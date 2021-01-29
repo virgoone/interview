@@ -1,6 +1,4 @@
-# 浏览器 &amp; 安全 &amp; 其他
-
-## 浏览器
+# 浏览器
 ### 1. 为什么一般把css放在<head></head>中，js放在<body>底部？
 
 - css 会阻塞页面渲染，越早加载越好
@@ -109,19 +107,13 @@ JavaScript的任务分为两种`同步`和`异步`
 1. **注入API**，注入Native对象或方法到 JavaScript 的 window 对象中（可以类比于 RPC 调用）。
 1. **拦截URL Schema**，客户端拦截 WebView 的请求并做相应的操作（可以类比于 JSONP）。
 
-## 安全
-
-### 1. CSRF 和 XSS 攻击分别是什么？
-
-- XSS：恶意攻击者往 Web 页面里插入恶意 Script 代码，当用户浏览该页之时，嵌入其中 Web 里面的 Script 代码会被执行，从而达到恶意攻击用户的目的。
-- CSRF：CSRF 攻击是攻击者借助受害者的 Cookie 骗取服务器的信任，可以在受害者毫不知情的情况下以受害者名义伪造请求发送给受攻击服务器，从而在并未授权的情况下执行在权限保护之下的操作。
-
 ## 优化
 
 ### 1. H5 如何获取首屏的加载时间？
 
 - 如果页面首屏有图片：首屏时间 = `首屏页面全部加载完毕的时刻 - preformance.timing.navigationStart`
 - 如果首屏没有图片：首屏时间 =  `performance.timing.domContentLoadedEventStart`  
+
 ## Git
 
 ### 1. git rebase 和 merge 的区别？
