@@ -1,12 +1,9 @@
 ---
 title: 面试指个北
 hero:
-  title: 面试指个北
-  img: 'https://tva1.sinaimg.cn/large/008eGmZEgy1gn4sp1tidrj30xc0ht76d.jpg'
+  title: 面试指个北 👆
+  image: 'https://tva1.sinaimg.cn/large/008eGmZEgy1gn4sp1tidrj30xc0ht76d.jpg'
   desc: “Empower everyone to achieve their full potential 😊”
-  actions:
-    - text: Go To 面试题库
-      link: '/面试题库'
 features:
   - title: 面试题库
     icon: 'https://tva1.sinaimg.cn/large/008eGmZEgy1gn5sdxp0bbj30e80e8wer.jpg'
