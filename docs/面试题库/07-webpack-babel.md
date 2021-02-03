@@ -44,6 +44,14 @@ HMR 的核心就是客户端从服务端去拉更新后的文件，准确的说�
 
 TBD
 
+### 6.1 如何配置 Tree-Shaking？
+
+TBD
+
+### 6.2 如何避免 Tree-Shaking？
+
+TBD
+
 ### 7.什么是 DCE？
 
 TBD

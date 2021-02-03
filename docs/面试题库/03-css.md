@@ -161,6 +161,27 @@ animation: name duration timing-function delay iteration-count direction;
 
 `requestAnimation`  可以说是为 动画量身打造的 `setTimeout` , 不同的是 `requestAnimationFrame`  是跟着**浏览器内建的刷新频率来执行回调函数，**这就是**浏览器实现动画的最佳效果**。
 
+### 3.1 `requestAnimationFrame` 是怎么调用的？
+
+```js
+window.requestAnimationFrame(callback);
+```
+
+- callback：下一次重绘之前更新动画帧所调用的函数，callback 仅有一个参数，为`DOMHighResTimeStamp` 参数，表示 `requestAnimationFrame()` 开始执行回调函数的时刻。
+
+- 返回值：一个 `long` 类型整数，唯一标志元组在列表中的位置，你可以传这个值给`cancelAnimationFrame()` 以取消动画。
+
+### 3.2 `requestAnimationFrame` 是怎么执行的？
+
+1. 判断 `document.hidden` 属性是否可见，可见状态下才会执行后续的步骤
+2. 浏览器清空上一轮的动画函数
+3. `requestAnimationFrame` 将回调函数追加到动画帧请求回调列表的末尾
+4. 当页面可见且动画帧请求 callback 回调函数列表不为空时，浏览器会定期将这些回调函数加入到浏览器 UI 线程的队列中（由系统决定回调函数的执行时机）。当浏览器执行这些 callback 回调函数的时候，会判断每个元组的 callback 的 `cancelled` 标志是否为 `false`，检查完成后执行回调函数。
+
+> 当执行 `requestAnimationFrame` 的时候，不会立即调用 callback 函数，只是将其放进回调函数队列而已。
+>
+> 同时，每个 callback 回调函数都有一个默认为 `false` 且不可见的 `cancelled` 属性
+
 ### 4. 常用的动画库及其特性？
 
 ### 5. 动画有什么优化的方式？
