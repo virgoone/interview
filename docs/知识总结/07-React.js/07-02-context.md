@@ -27,9 +27,10 @@ const MyContext = React.createContext(defaultValue);
 ### Context.Provider & Context.Consumer
 
 ```jsx
-<MyContext.Provider value={/* 某个值 */}>
+<MyContext.Provider value={某个值}>
   <MyContext.Consumer>
-    {value => /* 基于 context 值进行渲染 */}
+    // 基于 context 值进行渲染
+    {value => null}
   </MyContext.Consumer>
 </MyContext.Provider>
 ```

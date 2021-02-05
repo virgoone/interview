@@ -155,12 +155,25 @@ false;
 - defer 会在 DOMContentLoaded 前依次执行 （可以利用这两点哦！）
 - async 则是下载完立即执行，不一定是在 DOMContentLoaded 前，因为顺序无关，所以很适合像 Google Analytics 这样的无依赖脚本
 
-### 2. Promise 简单介绍
+### 2. 说说你理解的 Promise
 
-Promise 对象接受一个回调函数作为参数, 该回调函数接受两个参数，分别是成功时的回调 resolve 和失败时的回调 reject
-有三种状态：pending(进行中)、fulfilled(已成功)、rejected(已失败)
-优点是：统一异步 API，解决了回调地狱的问题
-缺点是：无法取消 Promise，如果不设置回调函数，Promise 内部抛出的错误，不会反应到外部，外部无法捕获
+Promise 对象是一个代理对象。它接受你传入的 executor（执行器）作为入参，允许你把**异步任务的成功和失败分别绑定到对应的处理方法上去**。
+
+一个 Promise 实例有三种状态：
+
+- **pending 状态，表示进行中**。这是 Promise 实例创建后的一个初始态；
+- **fulfilled 状态，表示成功完成**。这是我们在执行器中调用 resolve 后，达成的状态；
+- **rejected 状态，表示操作失败、被拒绝**。这是我们在执行器中调用 reject 后，达成的状态；
+
+**Promise 实例的状态是可以改变的，但它只允许被改变一次**。当我们的实例状态从 pending 切换为 rejected 后，就无法再扭转为 fulfilled，反之同理。
+
+- 当 Promise 的状态为 resolved 时，会触发其对应的 `then` 方法入参里的 `onfulfilled` 函数
+- 当 Promise 的状态为 rejected 时，会触发其对应的 `then` 方法入参里的 `onrejected` 函数。
+
+### 2.1 Promise 的优缺点是什么
+
+- 优点：**统一异步 API，解决了回调地狱的问题**
+- 缺点：**无法取消 Promise，如果不设置回调函数，Promise 内部抛出的错误，不会反应到外部，外部无法捕获**
 
 ## 作用域
 

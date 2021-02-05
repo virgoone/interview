@@ -170,3 +170,47 @@ animation: name duration timing-function delay iteration-count direction;
 | animation-delay           | 规定在动画开始之前的延迟。                                                                  |
 | animation-iteration-count | 规定动画应该播放的次数。                                                                    |
 | animation-direction       | 规定是否应该轮流反向播放动画。 （normal、alternate）                                        |
+
+## HTML5
+
+### Canvas
+
+`<canvas>` 是 HTML5 新增的元素，作为页面图形绘制的容器，可用于通过使用 JavaScript 中的脚本来绘制图形。例如，它可以用于绘制图形，制作照片，创建动画，甚至可以进行实时视频处理或渲染，Canvas 具有如下特点：
+
+- 依赖分辨率，基于位图；
+- 不支持事件处理器；
+- 弱的文本渲染能力；
+- 能够以 .png 或 .jpg 格式保存结果图像；
+- 最适合图像密集型的游戏，其中的许多对象会被频繁重绘；
+
+大多数 Canvas 绘图 API 都没有定义在 `<canvas>` 元素本身上，而是定义在通过画布的 `getContext()` 方法获得的一个“绘图环境”对象上。[Canvas API](https://link.jianshu.com?t=https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API) 也使用了路径的表示法。但是，路径由一系列的方法调用来定义，而不是描述为字母和数字的字符串，比如调用 `beginPath()` 和 `arc()` 方法。一旦定义了路径，其他的方法，如 `fill()`，都是对此路径操作。
+
+### SVG
+
+SVG 是英文 Scalable Vector Graphics 的缩写，意为**可缩放矢量图形**，用来定义用于网络的基于矢量的图形，其使用 XML 格式定义图像，并且具有如下特点：
+
+- 不依赖分辨率，基于矢量图；
+- 支持事件处理器；
+- 最适合带有大型渲染区域的应用程序（比如谷歌地图）；
+- 复杂度高会减慢渲染速度（任何过度使用 DOM 的应用都不快）；
+- 不适合游戏应用；
+
+来看一个简单的示例，用 SVG 画了一个圆：
+
+```xml
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <rect x="50" y="20" rx="20" ry="20" width="150" height="150"
+  style="fill:red;stroke:black;stroke-width:5;opacity:0.5"/>
+</svg>
+```
+
+SVG 代码以 `<svg>` 元素开始，包括开启标签 `<svg>` 和关闭标签 `</svg>` 。这是根元素。**width** 和 **height** 属性可设置此 SVG 文档的宽度和高度。**version** 属性可定义所使用的 SVG 版本，**xmlns** 属性可定义 SVG 命名空间。
+
+SVG 的 `<circle>` 用来创建一个圆。**cx** 和 **cy** 属性定义圆中心的 x 和 y 坐标。如果忽略这两个属性，那么圆点会被设置为 (0, 0)。**r** 属性定义圆的半径。
+
+下面主要是介绍 SVG 中的几个用于动画的元素，它们分别是：
+
+- **<animate>**：通常放置到一个 SVG 图像元素里面，用来定义这个图像元素的某个属性的动画变化过程；
+- **<animateMotion>**：元素也是放置一个图像元素里面，它可以引用一个事先定义好的动画路径，让图像元素按路径定义的方式运动；
+- **<animateTransform>**：元素对图形的运动和变换有更多的控制，它可以指定图形的变换、缩放、旋转和扭曲等；
+- **<mpath>**：元素的用法在上面的例子里出现过，它是一个辅助元素，通过它，`<animateMotion>`等元素可以引用一个外部的定义的`<path>`。让图像元素按这个`<path>`轨迹运动；
