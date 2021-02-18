@@ -125,7 +125,7 @@ BFC 是**块级格式化上下文**，脱离文档上下流，独立的渲染区
 
 - **清除元素内部浮动**
 - **解决外边距合并（塌陷）**问题
-- 制作**右侧自适应的两栏盒子**问题
+- 阻止元素被浮动的元素覆盖
 
 ## 动画
 
@@ -190,14 +190,63 @@ window.requestAnimationFrame(callback);
 
 ### 1. rem 方案和 vw 方案，各自的优缺点是什么？
 
-### 2. 1px 问题的实现方案有哪些？
+### 2. 什么是 1px 问题？为什么会出现 1px 问题？
 
-**1.局部处理**
+现象：在一些 **Retina 屏幕**的机型上，移动端页面的 1px 会变得很粗，呈现出不止 1px 的效果。
+
+原因：CSS 中的 1px 并不能和移动设备上的 1px 划等号。通过 `window.devicePixelRatio = 设备的物理像素 / CSS 像素` 来描述二者的关系。在部分机型中，dpr 可能为 2，这就意味着我设置的 1px CSS 像素，在这个设备上实际会用 2 个物理像素单元来进行渲染，所以实际看到的一定会比 1px 粗一些。
+
+### 3. 1px 问题的解决方案有哪些？
+
+**1. 直接写 0.5px**
+
+可以先在 JS 中拿到 `window.devicePixelRatio` 的值，然后把这个值通过 `JSX` 或者模板语法给到 CSS 的 data 里，达到这样的效果：
+
+```jsx
+<div id="container" data-device={window.devicePixelRatio}></div>
+```
+
+然后你就可以在 CSS 中用属性选择器来命中 `devicePixelRatio` 为某一值的情况，比如说这里我尝试命中 `devicePixelRatio` 为 2 的情况：
+
+```css
+#container[data-device='2'] {
+  border: 0.5px solid #333;
+}
+```
+
+直接把 `1px` 改成 `1/devicePixelRatio` 后的值，这是目前为止最简单的一种方法。这种方法的缺陷在于兼容性不行，IOS 系统需要 8 及以上的版本，安卓系统则直接不兼容。
+
+**2. 伪元素现放大后缩小**
+
+1. 在目标元素的后面追加一个 `::after` 伪元素，让这个元素布局为 absolute
+2. 整个伸展开铺在目标元素上，然后把它的宽和高都设置为目标元素的两倍，`border` 值设为 1px
+3. 接着借助 CSS 动画特效中的放缩能力，**把整个伪元素缩小为原来的 50%**。此时，伪元素的宽高刚好可以和原有的目标元素对齐，而 `border` 也缩小为了 1px 的二分之一，间接地实现了 0.5px 的效果
+
+```css
+#container[data-device='2'] {
+  position: relative;
+}
+
+#container[data-device='2']::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  content: '';
+  transform: scale(0.5);
+  transform-origin: left top;
+  box-sizing: border-box;
+  border: 1px solid #333;
+}
+```
+
+**3. viewport 缩放：局部处理**
 
 - `meta`标签中的 `viewport`属性 ，`initial-scale` 设置为 `1`
 - `rem`按照设计稿标准走，外加利用`transfrome` 的`scale(0.5)` 缩小一倍即可；
 
-**2.全局处理**
+**4. viewport 缩放：全局处理**
 
 - `mate`标签中的 `viewport`属性 ，`initial-scale` 设置为 `0.5`
 - `rem` 按照设计稿标准走即可
