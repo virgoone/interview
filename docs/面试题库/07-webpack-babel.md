@@ -84,3 +84,13 @@ Babel 的编译过程和大多数其他语言的编译器相似，可以分为�
 1. **tokens => **[**parser**](https://github.com/caiyongmin/awesome-coding-javascript/tree/master/src/bundler/babel/lib/parser.js)** => AST：**然后进行**语法分析**，会涉及到读取、暂存、回溯、暂存点销毁等操作。
 1. **AST => **[**transformer**](https://github.com/caiyongmin/awesome-coding-javascript/tree/master/src/bundler/babel/lib/transformer.js)** => newAST：**然后**转换**生成新的 AST。
 1. **newAST => **[**codeGenerator**](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/src/bundler/babel/lib/codeGenerator.js)** => output：**最后根据新生成的 AST **输出**目标代码。
+
+## 优化
+
+### 1. 前端性能优化做过哪些
+
+- 制定开发规范，js lint、css lint 等，统一，做好打包、构建等工具链
+- js 异步加载、公有文件请求 CDN，压缩混淆，预加载资源等
+- 合理利用浏览器缓存，做了些离线缓存
+- 减少网络请求次数
+- 减小文件体积
