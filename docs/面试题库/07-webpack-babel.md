@@ -42,11 +42,15 @@ HMR 的核心就是客户端从服务端去拉更新后的文件，准确的说�
 
 ### 6.Tree-Shaking 的原理是什么？
 
-TBD
+Tree-shaking 用于消除那些引用了但并没有被使用的模块
+
+**Tree-shaking 的消除原理是依赖于 ES6 的模块特性**，ES6 模块依赖关系是确定的，和运行时的状态无关，可以进行可靠的静态分析，这就是 tree-shaking 的基础。
 
 ### 6.1 如何配置 Tree-Shaking？
 
-TBD
+1. 首先，为了把采用 ES6 模块化的代码交给 Webpack，需要配置 Babel 让其保留 ES6 模块化语句，修改 `.babelrc`
+2. 使用 UglifyJS 来进行 Tree-Shaking
+3. 当你的项目使用了大量第三方库时，需要在 `mainFields` 配置模块的入口描述，优先使用 `jsnext:main` 作为入口，如果不存在 `jsnext:main` 就采用 `browser` 或者 `main` 作为入口
 
 ### 6.2 如何避免 Tree-Shaking？
 
@@ -54,11 +58,19 @@ TBD
 
 ### 7.什么是 DCE？
 
-TBD
+清除无用代码 Dead Code，**uglify 完成了 javascript 的 DCE**
+
+Dead Code 一般具有以下几个特征：
+
+- 代码不会被执行，不可到达
+- 代码执行的结果不会被用到
+- 代码只会影响死变量（只写不读）
 
 ### 8.介绍一下 webpack 的 scope hoisting
 
-TBD
+Scope Hoisting（作用域提升）可以**分析出模块之间的依赖关系，尽可能的把打散的模块合并到一个函数中去，但前提是不能造成代码冗余。 因此只有那些被引用了一次的模块才能被合并。**
+
+由于 Scope Hoisting 需要分析出模块之间的依赖关系，因此源码必须采用 ES6 模块化语句，不然它将无法生效。
 
 ### 9.webpack 怎么提升构建性能？
 
