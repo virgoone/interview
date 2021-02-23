@@ -88,14 +88,6 @@ HMR 的核心就是客户端从服务端去拉更新后的文件，准确的说�
 
 后续的部分（拿到增量后的更新，保留的状态，确定需要更新的部分）由 `HotModulePlugin` 来完成，提供了相关 API 以供开发者针对自身场景进行处理，像 `react-hot-loader` 和 `vue-loader` 都是借助这些 API 实现 HMR。
 
-## 文件指纹
-
-文件指纹是指打包后的文件名的**后缀**。
-
-- **Hash**：和整个项目的构建有关，只要项目文件有修改，整个项目构建的 hash 值就会更改
-- **Chunkhash**：和 webpack 打包的 chunk 有关，不同的 entry 会生出不同的 chunkhash
-- **Contenthash**：根据文件内容来定义 hash，文件内容不变，则 contenthash 不变
-
 ### JS 的指纹设置
 
 ```js
@@ -258,3 +250,11 @@ module.exports = {
 ```
 
 对于采用了非 ES6 模块化语法的代码，Webpack 会降级处理不使用 Scope Hoisting 优化。
+
+## 文件指纹
+
+文件指纹是指打包后的文件名的**后缀**。
+
+- **Hash**：和整个项目的构建有关，只要项目文件有修改，整个项目构建的 hash 值就会更改
+- **Chunkhash**：和 webpack 打包的 chunk 有关，不同的 entry 会生出不同的 chunkhash
+- **Contenthash**：根据文件内容来定义 hash，文件内容不变，则 contenthash 不变

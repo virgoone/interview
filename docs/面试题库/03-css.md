@@ -39,7 +39,8 @@ flex 主轴的默认方向是水平方向，可通过属性 `flex-direction`  �
 
 ### 3. display:none 和 visibility:hidden 区别
 
-1、 `display:none`  的子孙节点消失，这是由于元素从渲染树中消失造成， `visibility:hidden`  的子孙节点消失是由于继承性，可以设置 `visibility：visible`  让子孙节点显示；<br />2、 `display：none`  不占据任何空间； `visibility：hidden`  仍占据空间；<br />3、 `display:none`  会引起回流和重绘， `visibility:hidden`  会引起重绘。
+1. `display：none`  不占据任何空间，`visibility：hidden` 仍占据空间
+2. `display:none`  会引起回流和重绘，`visibility:hidden`  只会引起重绘
 
 ### 4. 垂直居中方案
 
@@ -84,6 +85,11 @@ align-items: center;
 - **relative**：生成相对定位的元素，相对于其正常位置进行定位。
 - **inherit**：规定从父元素继承 position 属性的值
 
+### 7.1 绝对定位和 float 有什么异同？
+
+相同点：都可以让元素脱离文档流，并且可以设置其宽高
+不同点：float 仍会占据位置，而绝对定位会覆盖文档流中的其他元素
+
 ### 8. CSS 中伪类与伪元素的区别
 
 1. 表示方法：CSS2.1 及之后规定伪类用单冒号`:` 表示，伪元素用 `::` 表示
@@ -95,6 +101,46 @@ align-items: center;
 1. `initial` ：初始化到该属性时**浏览器默认定义的值**
 1. `inherit` ： 每个 CSS 属性都有，是**默认继承**或**默认不继承**，可以通过该属性来决定继承父元素
 1. `unset` ： unset 可以理解为**不设置**，设置它则会**优先用 inherit 关键字的样式，其次使用 initial 关键字的样式**
+
+### 10. link 和 @import 有什么区别
+
+1. link 属于 HTML 标签，而 @import 是 CSS 提供的
+2. 页面被加载的时，link 会同时被加载，而 @import 引用的 CSS 会等到页面被加载完再加载
+3. import 只在 IE5 以上才能识别，而 link 是 HTML 标签，无兼容问题
+4. link 方式的样式的权重高于 @import 的权重
+
+### 11. CSS3 有什么新特性
+
+- CSS3 实现**圆角**（border-radius），**阴影**（box-shadow）
+- 对文字加特效（text-shadow），线性渐变（gradient），旋转（transform）
+- 在 CSS3 中唯一引入的伪元素是 `::selection`
+- **媒体查询**，多栏布局
+- **动画** animation，translation
+
+### 12. 什么是 CSS sprites？
+
+CSS Sprites 就是把**网页中一些背景图片整合到一张图片文件**中，再利用 CSS 的 `background-image`，`background-repeat`，`background-position` 的组合进行背景定位，`background-position` 可以用数字能精确的定位出背景图片的位置。
+
+这样可以**减少很多图片请求的开销**，因为请求耗时比较长；请求虽然可以并发，但是也有限制，一般浏览器都是 6 个。对于未来而言，就不需要这样做了，因为有了 HTTP/2。
+
+### 13. 如何清除浮动？
+
+1. 使用空标签清除浮动：这种方法是在所有浮动标签后面添加一个空标签定义 CSS `clear:both`，弊端就是增加了无意义标签。 2.使用 overflow（创建 BFC）： 给包含浮动元素的父标签添加 CSS 属性 `overflow:auto` 或者 `overflow: hidden` 3.使用 after 伪对象清除浮动：该方法只适用于非 IE 浏览器
+
+```CSS
+.clearfix:after{
+  content: "";
+  display: block;
+  clear: both;
+ }
+```
+
+### 14. 什么是 FOUC（无样式内容闪烁）？你如何来避免 FOUC？
+
+引用 CSS 文件的 @import 就是造成这个问题的罪魁祸首。
+
+IE 会先加载整个 HTML 文档的 DOM，然后再去导入外部的 CSS 文件，因此，在页面 DOM 加载完成到 CSS 导入完成中间会有一段时间页面上的内容是没有样式的，这段时间的长短跟网速，电脑速度都有关系。
+解决方法：在 `<head>` 之间加入一个 `<link>` 或者 `<script>` 元素就可以了。
 
 ## 重绘和回流
 

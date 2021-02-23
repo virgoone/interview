@@ -168,7 +168,7 @@ interface User {
 用类型别名表示就是：
 
 ```ts
-type partial<T> = { [K in keyof T]: K[T] };
+type partial<T> = { [K in keyof T]: T[K] };
 
 type partialUser = partial<User>;
 ```

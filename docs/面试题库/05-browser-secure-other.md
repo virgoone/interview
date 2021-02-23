@@ -7,16 +7,54 @@
 
 ### 2. cookies，sessionStorage 和 localStorage 的区别
 
-- `cookie` 是网站为了标示用户身份而储存在用户本地终端上的数据（通常经过加密）
-- `cookie` 数据始终在同源的 http 请求中携带（即使不需要），记会在浏览器和服务器间来回传递（优化点）
-- `sessionStorage` 和 `localStorage` 不会自动把数据发给服务器，仅在本地保存
-- 存储大小：
-  - `cookie` 数据大小不能超过 4k
-  - `sessionStorage` 和  `localStorage`虽然也有存储大小的限制，但比 cookie 大得多，可以达到 5M 或更大
-- 有期时间：
-  - `localStorage` 存储持久数据，浏览器关闭后数据不丢失除非主动删除数据
+安全：
 
-`sessionStorage` 数据在当前浏览器窗口关闭后自动删除<br />`cookie 设置的 cookie` 过期时间之前一直有效，即使窗口或浏览器关闭
+- cookie 是网站为了标示用户身份而储存在用户本地终端上的数据（通常经过加密）
+- cookie 数据始终在同源的 http 请求中携带（即使不需要），记会在浏览器和服务器间来回传递（优化点）
+- sessionStorage 和 localStorage 不会自动把数据发给服务器，仅在本地保存
+
+存储大小：
+
+- cookie 数据大小不能超过 4k
+- sessionStorage 和  localStorage 虽然也有存储大小的限制，但比 cookie 大得多，可以达到 5M 或更大
+
+有效期：
+
+- localStorage 存储持久数据，浏览器关闭后数据不丢失除非主动删除数据
+- sessionStorage 数据在当前浏览器窗口关闭后自动删除
+- cookie 在设置的 cookie 过期时间之前一直有效，即使窗口或浏览器关闭
+
+调用方法：
+
+- Web Storage 拥有 `setItem`, `getItem`, `removeItem`, `clear`等方法
+- cookie 需要前端开发者自己封装 `setCookie`，`getCookie`
+
+### 2.1 cookie 的优缺点分别是什么
+
+优点：可以与与服务器进行交互，有极高的扩展性和可用性
+缺点：
+
+1. Cookie 数量和长度的限制。每个 domain 最多只能有 20 条 cookie，每个 cookie 长度不能超过 4KB，否则会被截掉。
+
+2.安全性问题。如果 cookie 被人拦截了，那人就可以取得所有的 session 信息。即使加密也与事无补，因为拦截者并不需要知道 cookie 的意义，他只要原样转发 cookie 就可以达到目的了。
+
+3.有些状态不可能保存在客户端。例如，为了防止重复提交表单，我们需要在服务器端保存一个计数器。如果我们把这个计数器保存在客户端，那么它起不到任何作用。
+
+### 2.2 如何合理使用 cookie
+
+1. 通过良好的编程，控制保存在 cookie 中的 session 对象的大小。
+2. 通过加密和安全传输技术（SSL），减少 cookie 被破解的可能性。
+3. 只在 cookie 中存放不敏感数据，即使被盗也不会有重大损失。
+4. 控制 cookie 的生命期，使之不会永远有效。偷盗者很可能拿到一个过期的 cookie。
+
+### 2.3 cookie 和 session 的区别
+
+1.  cookie 数据存放在客户的浏览器上，session 数据放在服务器上
+    2、cookie 不是很安全，别人可以分析存放在本地的 cookie 并进行 cookie 欺骗
+    考虑到安全应当使用 session
+    3、session 会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能，考虑到减轻服务器性能方面，应当使用 cookie
+    4、单个 cookie 保存的数据不能超过 4K，很多浏览器都限制一个站点最多保存 20 个 cookie。
+    5、所以建议：将登陆信息等重要信息存放为 session，其他信息如果需要保留，可以放在 cookie 中
 
 ### 3. 节流和防抖是什么？有什么区别？
 

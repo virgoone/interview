@@ -55,7 +55,7 @@ Object.getPrototypeOf(a) === Array.prototype; // => true
 // 5.基于Object.prototype.toString
 Object.prototype.toString.apply(a) === '[object Array]';
 // 除了Object.prototype.toString外，其它方法都不能正确判断变量的类型。
-在ES6中判断变量是否为数组;
+// 在ES6中判断变量是否为数组;
 Array.isArray([]); // => true
 Array.isArray({ 0: 'a', length: 1 }); // => false
 if (!Array.isArray) {
@@ -207,6 +207,7 @@ A.call(o);
 - 函数执行后返回结果是一个内部函数，并被外部变量所引用，如果内部函数持有被执行函数作用域的变量，即形成了闭包，可以在内部函数访问到外部函数作用域
 - 使用闭包，一可以读取函数中的变量，二可以将函数中的变量存储在内存中，保护变量不被污染
 - **使用闭包的优点是可以避免全局变量污染**
+- 缺点是闭包会常驻内存，会增大内存使用量，使用不当很容易造成内存泄露
 
 应用场景：
 
@@ -316,3 +317,45 @@ CSRF 攻击是攻击者借助受害者的 Cookie 骗取服务器的信任，可�
 
 - load 页面加载完毕触发
 - domcontentload dom 树加载完成，其他 js、css 资源还未加载好
+
+### 3. 如何判断 JS 代码运行在浏览器环境中还是 Node 中？
+
+检查是否存在全局变量 `window`，有则是浏览器环境，否则是 Node
+
+### 4. 如何获取 userAgent？
+
+使用内置对象 `navigator.userAgent`
+
+## 正则
+
+### 1. 在 JavaScript 的字符串与正则表达式操作中，`test`、`exec`、 `match` 这三个方法的用法是什么
+
+1. `RegExp.prototype.test(str)`
+
+`test` 是 JavaScript 中正则表达式对象的一个方法，用来**检测正则表达式对象与传入的字符串是否匹配**，若匹配返回 `true`，若不匹配返回 `false`，如：
+
+```js
+/Jack/.test('ack'); // false
+```
+
+2. `RegExp.prototype.exec(str)`
+
+`exec` 方法是正则表达式的方法，传入参数为字符串，返回字符串匹配正则表达式的结果。当正则表达式没有 `g` 标志时，其返回值与 `String.prototype.match()` 没有 `g` 标志时返回的结果一样，当正则表达式有 `g` 标志时，可以多次执行 `exec` 方法来查找同一个字符串中的成功匹配。
+
+```js
+'123123'.match(/(123){2}/) // ["123123", "123", index: 0, input: "123123", groups: undefined]
+/(123){2}/.exec('123123')  // ["123123", "123", index: 0, input: "123123", groups: undefined]
+```
+
+3. `String.prototype.match(reg)`
+
+`match` 方法是字符串的方法，传入参数为正则表达式，返回字符串匹配正则表达式的结果。
+
+```js
+'123123'.match(/(123){2}/); // ["123123", "123", index: 0, input: "123123", groups: undefined]
+```
+
+### 1.1 正则表达式中的括号在这三个方法中的作用分别是什么？
+
+- 仅分组：`RegExp.prototype.text()`
+- 分组及捕获：`RegExp.prototype.exec()`，`String.prototype.match()`，捕获的意思是将用户指定的匹配到的子字符串暂存并返回给用户
