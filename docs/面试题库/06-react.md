@@ -195,4 +195,4 @@ mobx 与 redux 的功能相似，mobx 的实现思想和 Vue 几乎一样，所�
 
 ### 3. Redux 设计思想
 
-它将整个应用状态存储到store里面，组件可以派发（dispatch）修改数据（state）的行为（action）给store，store内部修改之后，其他组件可以通过订阅（subscribe）中的状态state来刷新（render）自己的视图。
+它将整个应用状态存储到 `store` 里面，组件可以派发（ `dispatch` ）修改数据（ `state` ）的行为（ `action` ）给 `store` ， `store` 内部修改之后，其他组件可以通过订阅（ `subscribe` ）中的状态 `state` å来刷新（ `render` ）自己的视图。
