@@ -192,3 +192,7 @@ mobx 与 redux 的功能相似，mobx 的实现思想和 Vue 几乎一样，所�
 - 单一数据源 : 整个应用的 `state` 都存储在一颗 state tree 中，并且只存在与唯一一个 store 中
 - state 是只读的 : 唯一改变 state 的方法只能通过触发 `action`，然后通过 action 的 `type` 进而分发 dispatch 。不能直接改变应用的状态
 - 状态修改均由纯函数完成 : 为了描述 action 如何改变 state tree，需要编写 `reducers`
+
+### 3. Redux 设计思想
+
+它将整个应用状态存储到store里面，组件可以派发（dispatch）修改数据（state）的行为（action）给store，store内部修改之后，其他组件可以通过订阅（subscribe）中的状态state来刷新（render）自己的视图。
