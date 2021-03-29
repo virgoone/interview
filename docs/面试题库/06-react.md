@@ -104,6 +104,18 @@ React 16 之前：
 在 HTML 文档中，许多表单元素（例如`<select>、<textrarea>、<input>`）都保持自己的状态。不受控制的组件将 DOM 视为这些输入状态的真实源。在受控组件中，内部状态用于跟踪元素值。当输入值改变时，React 会重新渲染输入。
 在与非 React 代码集成时，不受控制的组件非常有用（例如，如果您需要支持某种 jQuery 表单插件）。
 
+### 10. shallowEqual 的实现
+
+在学习 react PureComponent 的时候，看到有一句话，由于 PureComponent 的 shouldeComponentUpdate 里，实际是对 props/state 进行了一个浅对比，所以对于嵌套的对象不适用，没办法比较出来。那什么是浅对比呢，为什么对于嵌套的对象就不适用了呢？
+
+```
+if (this._compositeType === CompositeTypes.PureClass) {
+  shouldUpdate = !shallowEqual(prevProps, nextProps) || ! shallowEqual(inst.state, nextState);
+}
+```
+
+当对比的类型为 `Object` 的时候并且key的长度相等的时候，浅比较也仅仅是用 `Object.is()` 对 `Object` 的 value 做了一个基本数据类型的比较，所以如果 key 里面是对象的话，有可能出现比较不符合预期的情况，所以浅比较是不适用于嵌套类型的比较的。
+
 ### 虚拟 DOM
 
 ### 1. 写 React/ Vue 项目时为什么要在列表组件中写 key，其作用是什么
