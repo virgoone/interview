@@ -115,7 +115,7 @@ align-items: center;
 - 对文字加特效（text-shadow），线性渐变（gradient），旋转（transform）
 - 在 CSS3 中唯一引入的伪元素是 `::selection`
 - **媒体查询**，多栏布局
-- **动画** animation，translation
+- **动画** animation
 
 ### 12. 什么是 CSS sprites？
 
@@ -141,6 +141,10 @@ CSS Sprites 就是把**网页中一些背景图片整合到一张图片文件**�
 
 IE 会先加载整个 HTML 文档的 DOM，然后再去导入外部的 CSS 文件，因此，在页面 DOM 加载完成到 CSS 导入完成中间会有一段时间页面上的内容是没有样式的，这段时间的长短跟网速，电脑速度都有关系。
 解决方法：在 `<head>` 之间加入一个 `<link>` 或者 `<script>` 元素就可以了。
+
+### 15. CSS 选择器权重。怎么计算
+
+id>class>标签>通配符
 
 ## 重绘和回流
 
