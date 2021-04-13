@@ -116,6 +116,14 @@ if (this._compositeType === CompositeTypes.PureClass) {
 
 当对比的类型为 `Object` 的时候并且key的长度相等的时候，浅比较也仅仅是用 `Object.is()` 对 `Object` 的 value 做了一个基本数据类型的比较，所以如果 key 里面是对象的话，有可能出现比较不符合预期的情况，所以浅比较是不适用于嵌套类型的比较的。
 
+### 11. 什么是 render prop 的组件
+
+术语“render prop” 是指一种技术，用于使用一个值为函数的prop 在React 组件之间的代码共享。 带有渲染属性(Render Props)的组件需要一个返回React 元素并调用它的函数，而不是实现自己的渲染逻辑。 使用render props 的库包括React Router 和Downshift。
+
+### 12. React 中函数组件和普通组件有什么区别
+
+两者最明显的不同就是在语法上，函数组件是一个纯函数，它接收一个 props 对象返回一个 react 元素。 而类组件需要去继承 React.Component 并且创建 render 函数返回 react 元素，这将会要更多的代码，虽然它们实现的效果相同
+
 ### 虚拟 DOM
 
 ### 1. 写 React/ Vue 项目时为什么要在列表组件中写 key，其作用是什么
