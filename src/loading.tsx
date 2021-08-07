@@ -33,9 +33,9 @@ const LoadContainer = styled.div`
 `;
 
 const box = styled.div`
-  background-color: ${(props: StyleProps) => props.color || '#00adb5'};
+  background-color: ${(props: StyleProps) => props.color || '#111'};
   height: 100%;
-  width: 6px;
+  width: 5px;
   display: inline-block;
   margin-left: 5px;
   animation: ${stretchdelay} ${(props: StyleProps) => props.speed || 1.2}s
