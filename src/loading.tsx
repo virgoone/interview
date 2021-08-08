@@ -27,7 +27,7 @@ const stretchdelay = keyframes`
 
 const LoadContainer = styled.div`
   width: 100px;
-  height: ${(props: StyleProps) => `${props.size}` || '30px'};
+  height: ${(props: StyleProps) => `${props.size}` || '40px'};
   text-align: center;
   font-size: 10px;
 `;
@@ -35,7 +35,7 @@ const LoadContainer = styled.div`
 const box = styled.div`
   background-color: ${(props: StyleProps) => props.color || '#111'};
   height: 100%;
-  width: 5px;
+  width: 3px;
   display: inline-block;
   margin-left: 5px;
   animation: ${stretchdelay} ${(props: StyleProps) => props.speed || 1.2}s
@@ -66,7 +66,7 @@ const WaveLoading = ({
   style = commonStyle,
   color,
   speed,
-  size = '30px',
+  size = '40px',
 }: {
   style: any
   color: string
